@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
         .heading {
-            color: pink;
+            color: blue;
         }
     </style>
 </head>
@@ -16,19 +16,22 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-            const Lake = ({name}) => <h1>{name}</h1>;
-            const SkiResort = ({name}) => <h1>{name}</h1>;
+            const lakeList = [
+                {id:1, name:"Echo Lake", trailHead:"Echo Lake"},
+                {id:2, name:"Maud Lake", trailHead:"Wright's View"},
+                {id:3, name:"Cascade Lake", trailHead:"Bay View"}
+            ]
 
-            const App = ({summer}) => (
-                <div>
-                    {summer
-                    ? <Lake name="Lake Tahoe"/> 
-                    : <SkiResort name="Northern SkiResort"/>}
-                </div>
+            const App = ({lakes}) => (
+                <ul>
+                    {lakes.map(lake =>
+                        <li className="heading" key={lake.id}>{lake.name} | TrailHead: {lake.trailHead}</li>
+                    )}
+                </ul>
             )
 
             ReactDOM.render(
-                <App summer={false} />,
+                <App lakes={lakeList} />,
                 document.getElementById("root")
             );
         </script>
